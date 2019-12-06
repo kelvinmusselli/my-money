@@ -1,73 +1,42 @@
-import React, { Component } from 'react';
-// import { View } from 'react-native';
+import React from 'react';
+import Image from '../../assets/icon/cash.png';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import StorageActions from '../../store/ducks/storage';
-import { Container, View, Text } from './styles';
-import LoginActions from '../../store/ducks/login';
+import {
+  Container,
+  ContentUser,
+  ContentTextUserWelcome,
+  ContentTextUser,
+  LabelInputUser,
+  InputUser,
+  AlingImage,
+  Imagem,
+  BotaoIr,
+} from './styles';
 
-// import Icone from '../../assets/icon/cash.svg';
+export default function Login() {
+  return (
+    <Container>
+      <ContentUser>
+        <AlingImage>
+          <Imagem source={Image} />
+        </AlingImage>
 
-class Login extends Component {
-  static propTypes = {
-    data: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.shape()]),
-    error: PropTypes.oneOfType([PropTypes.oneOf([null]), PropTypes.string]),
-    storageError: PropTypes.oneOfType([
-      PropTypes.oneOf([null]),
-      PropTypes.string,
-    ]),
-    success: PropTypes.bool.isRequired,
-    loading: PropTypes.bool.isRequired,
-    loginRequest: PropTypes.func.isRequired,
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func,
-    }).isRequired,
-    setStorageData: PropTypes.func.isRequired,
-  };
+        <ContentTextUserWelcome>Bem vindo</ContentTextUserWelcome>
+        <ContentTextUser>Como gostaria de ser chamado?</ContentTextUser>
 
-  static defaultProps = {
-    data: null,
-    error: null,
-    storageError: null,
-  };
-
-  state = {
-    nameUser: '',
-    nameInput: null,
-  };
-
-  inputs = {};
-
-  render() {
-    const { nameUser, nameInput } = this.state;
-    const { loading, error, storageError } = this.props;
-
-    return (
-      <Container>
-        <View>
-          <Text>AEEE</Text>
-        </View>
-      </Container>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  data: state.login.data,
-  loading: state.login.loading,
-  success: state.login.success,
-  error: state.login.error,
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      ...LoginActions,
-      ...StorageActions,
-    },
-    dispatch
+        <LabelInputUser>
+          <InputUser
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Escreva aqui..."
+            returnKeyType="send"
+          />
+          <BotaoIr>
+            <Icon name="send" size={30} color="#aaa" />
+          </BotaoIr>
+        </LabelInputUser>
+      </ContentUser>
+    </Container>
   );
-
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+}

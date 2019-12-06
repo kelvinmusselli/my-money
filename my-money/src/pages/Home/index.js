@@ -1,8 +1,14 @@
 import React from 'react';
-import { View } from 'react-native';
 
-// import { Container } from './styles';
+import { Container, InfoUserView, InfoUser, LabelSaldo } from './styles';
 
 export default function Home() {
-  return <View />;
+  return (
+    <Container>
+      <InfoUserView>
+        <InfoUser>Olá, Kelvin =)</InfoUser>
+      </InfoUserView>
+      <LabelSaldo>Saldo: R$ 20,00</LabelSaldo>
+    </Container>
+  );
 }
