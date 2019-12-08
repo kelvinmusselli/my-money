@@ -13,7 +13,8 @@ import {
   ViewContentList,
   ListTextValues,
   DescriptionValue,
-  StatusValues,
+  InfosSaldos,
+  ValueSaldo,
 } from './styles';
 
 class Home extends Component {
@@ -32,7 +33,10 @@ class Home extends Component {
       <Container>
         <InfoUserView>
           <InfoUser>Olá, {this.state.name} =)</InfoUser>
-          <LabelSaldo>Saldo: R$ 20,00</LabelSaldo>
+          <InfosSaldos>
+            <LabelSaldo>Carteira</LabelSaldo>
+            <ValueSaldo>R$ 20,00</ValueSaldo>
+          </InfosSaldos>
         </InfoUserView>
 
         <List
@@ -43,9 +47,6 @@ class Home extends Component {
               <ListValues>
                 <DescriptionValue>{item.description}</DescriptionValue>
                 <ListTextValues>{item.value}</ListTextValues>
-              </ListValues>
-              <ListValues>
-                <StatusValues>{item.status}</StatusValues>
               </ListValues>
             </ViewContentList>
           )}

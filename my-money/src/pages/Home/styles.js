@@ -7,16 +7,26 @@ export const Container = styled.View`
 `;
 
 export const InfoUserView = styled.View`
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
+`;
+
+export const InfosSaldos = styled.View``;
+
+export const ValueSaldo = styled.Text`
+  color: #000;
+  font-size: 16px;
 `;
 
 export const InfoUser = styled.Text`
   font-size: 20px;
 `;
 
-export const LabelSaldo = styled.Text``;
+export const LabelSaldo = styled.Text`
+  color: #000;
+  font-size: 16px;
+`;
 
 export const Chart = styled.View``;
 
@@ -30,22 +40,17 @@ export const ViewContentList = styled.View``;
 export const ListValues = styled.View`
   padding-left: 0px;
   margin-top: 10px;
-  flex: 1;
-  align-items: center;
   justify-content: space-between;
-  background: #eee;
+  flex-direction: row;
+  height: 50px;
+  align-items: center;
 `;
 
 export const DescriptionValue = styled.Text`
-  font-size: 22px;
+  font-size: 20px;
   color: #000;
 `;
 
 export const ListTextValues = styled.Text`
-  font-size: 18px;
-`;
-
-export const StatusValues = styled.Text`
   font-size: 16px;
-  color: blue;
 `;
