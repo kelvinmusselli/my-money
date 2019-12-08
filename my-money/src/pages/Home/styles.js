@@ -29,6 +29,11 @@ export const List = styled.FlatList.attrs({
 export const ViewContentList = styled.View``;
 export const ListValues = styled.View`
   padding-left: 0px;
+  margin-top: 10px;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  background: #eee;
 `;
 
 export const DescriptionValue = styled.Text`

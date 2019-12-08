@@ -43,6 +43,8 @@ class Home extends Component {
               <ListValues>
                 <DescriptionValue>{item.description}</DescriptionValue>
                 <ListTextValues>{item.value}</ListTextValues>
+              </ListValues>
+              <ListValues>
                 <StatusValues>{item.status}</StatusValues>
               </ListValues>
             </ViewContentList>
