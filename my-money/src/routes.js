@@ -48,7 +48,7 @@ import ListLoss from './pages/ListLoss';
 const Routes = createAppContainer(
   createBottomTabNavigator(
     {
-      // Login,
+      Login,
       Home,
     },
     {

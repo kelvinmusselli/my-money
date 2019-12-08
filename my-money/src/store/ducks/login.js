@@ -1,12 +1,12 @@
 export const Types = {
-  REQUEST: 'TEST_REQUEST',
+  REQUEST: 'LOGIN_REQUEST',
 };
 
 const INITIAL_STATE = {
   data: null,
 };
 
-export default function test(state = INITIAL_STATE, action) {
+export default function login(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.REQUEST:
       return {

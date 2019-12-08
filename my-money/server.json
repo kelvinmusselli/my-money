@@ -1,0 +1,16 @@
+{
+  "in_out": [
+    {
+      "id": "1",
+      "description": "Hot dog",
+      "value": "R$ 10,00",
+      "status": "in"
+    },
+    {
+      "id": "2",
+      "description": "sorvete",
+      "value": "R$ 20,00",
+      "status": "out"
+    }
+  ]
+}

@@ -19,7 +19,7 @@ const composer = __DEV__
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['test'],
+  whitelist: ['login'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
