@@ -79,3 +79,23 @@ export const LegendGreen = styled.View`
   width: 30px;
   background: #aaa;
 `;
+
+export const ButtonOption = styled(RectButton).attrs({
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 2,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+
+  elevation: 5,
+})`
+  height: 60px;
+  width: 60px;
+  border-radius: 60px;
+  justify-content: center;
+  align-items: center;
+  background: #81d4fa;
+  margin: 0 0 0 auto;
+`;

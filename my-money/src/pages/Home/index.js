@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../service/api';
 import { R } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { PieChart } from 'react-native-svg-charts';
 
 import {
@@ -21,6 +21,7 @@ import {
   Legends,
   LegendRed,
   LegendGreen,
+  ButtonOption,
 } from './styles';
 
 class Home extends Component {
@@ -63,13 +64,8 @@ class Home extends Component {
             <ValueSaldo>R$ 20,00</ValueSaldo>
           </InfosSaldos>
         </InfoUserView>
-        <DivChart>
-          <PieChart style={{ height: 200 }} data={pieData} />
-          <Legends>
-            <LegendRed />
-            <LegendGreen />
-          </Legends>
-        </DivChart>
+
+        <PieChart style={{ height: 200 }} data={pieData} />
 
         <List
           data={this.state.data}
@@ -83,6 +79,9 @@ class Home extends Component {
             </ViewContentList>
           )}
         />
+        <ButtonOption>
+          <Icon name="add" size={25} color="#fff" />
+        </ButtonOption>
       </Container>
     );
   }
