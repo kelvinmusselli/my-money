@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import api from '../../service/api';
-import {} from 'react-native';
+import { R } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { PieChart } from 'react-native-svg-charts';
 
 import {
   Container,
@@ -15,6 +17,10 @@ import {
   DescriptionValue,
   InfosSaldos,
   ValueSaldo,
+  DivChart,
+  Legends,
+  LegendRed,
+  LegendGreen,
 } from './styles';
 
 class Home extends Component {
@@ -29,15 +35,41 @@ class Home extends Component {
   }
 
   render() {
+    const data = [50, 10];
+
+    const randomColor = () =>
+      ('#' + ((Math.random() * 0xffffff) << 0).toString(16) + '000000').slice(
+        0,
+        7
+      );
+
+    const pieData = data
+      .filter(value => value > 0)
+      .map((value, index) => ({
+        value,
+        svg: {
+          fill: randomColor(),
+          onPress: () => console.log('press', index),
+        },
+        key: `pie-${index}`,
+      }));
+
     return (
       <Container>
         <InfoUserView>
-          <InfoUser>Olá, {this.state.name} =)</InfoUser>
+          <InfoUser>Olá, {this.state.name}</InfoUser>
           <InfosSaldos>
             <LabelSaldo>Carteira</LabelSaldo>
             <ValueSaldo>R$ 20,00</ValueSaldo>
           </InfosSaldos>
         </InfoUserView>
+        <DivChart>
+          <PieChart style={{ height: 200 }} data={pieData} />
+          <Legends>
+            <LegendRed />
+            <LegendGreen />
+          </Legends>
+        </DivChart>
 
         <List
           data={this.state.data}

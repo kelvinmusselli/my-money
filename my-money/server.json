@@ -4,13 +4,15 @@
       "id": "1",
       "description": "Hot dog",
       "value": "R$ 10,00",
-      "status": "in"
+      "status": "in",
+      "period": "09/12/2019"
     },
     {
       "id": "2",
-      "description": "sorvete",
+      "description": "Sorvete",
       "value": "R$ 20,00",
-      "status": "out"
+      "status": "out",
+      "period": "09/12/2019"
     }
   ]
 }
