@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { PieChart } from 'react-native-svg-charts';
 import PropTypes from 'prop-types';
@@ -25,27 +24,15 @@ import {
   ButtonOption,
 } from './styles';
 
-function Home({ login }) {
-  console.log(login);
-
+function Home({ login, dispatch }) {
   state = {
-    money: [
-      {
-        id: '1',
-        description: 'Hot dog',
-        value: 'R$ 10,00',
-        status: 'in',
-        period: '09/12/2019',
-      },
-    ],
+    money: [],
   };
 
-  handleAddMoney = depot => {
-    const { dispatch } = this.props;
-
+  handleAddMoney = money => {
     dispatch({
       type: 'ADD_MONEY',
-      depot,
+      money,
     });
   };
 
@@ -92,7 +79,17 @@ function Home({ login }) {
           </ViewContentList>
         )}
       />
-      <ButtonOption onPress={() => this.handleAddMoney(this.state.money)}>
+      <ButtonOption
+        onPress={() =>
+          this.handleAddMoney({
+            id: '1',
+            description: 'Hot dog',
+            value: 'R$ 10,00',
+            status: 'in',
+            period: '09/12/2019',
+          })
+        }
+      >
         <Icon name="add" size={25} color="#fff" />
       </ButtonOption>
     </Container>
@@ -101,5 +98,7 @@ function Home({ login }) {
 
 const mapStateToProps = state => ({
   login: state.login,
+  money: state.money,
 });
+
 export default connect(mapStateToProps)(Home);

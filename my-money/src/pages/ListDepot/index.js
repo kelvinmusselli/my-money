@@ -11,8 +11,6 @@ import {
 } from './styles';
 
 function ListDepot({ money }) {
-  console.log(money);
-
   return (
     <Container>
       <List

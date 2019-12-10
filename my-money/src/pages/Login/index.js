@@ -28,15 +28,17 @@ class Login extends Component {
       type: 'ADD_USER',
       logar,
     });
+
     this.setState({
       logar: logar,
-    }),
-      console.log(this.state.logar);
+    });
+
     AsyncStorage.setItem('logar', JSON.stringify(logar));
   };
 
   async componentDidMount() {
-    const { logar } = await AsyncStorage.getItem('logar');
+    const logar = await AsyncStorage.getItem('logar');
+
     if (logar) {
       this.setState({
         logar: JSON.parse(logar),
