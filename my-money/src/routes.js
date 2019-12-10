@@ -50,6 +50,7 @@ const Routes = createAppContainer(
     {
       Login,
       Home,
+      ListDepot,
     },
     {
       headerLayoutPreset: 'center',

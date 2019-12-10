@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import api from '../../service/api';
-import { R } from 'react-native';
+import { connect } from 'react-redux';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { PieChart } from 'react-native-svg-charts';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -24,66 +25,81 @@ import {
   ButtonOption,
 } from './styles';
 
-class Home extends Component {
+function Home({ login }) {
+  console.log(login);
+
   state = {
-    name: 'Kelvin',
-    data: [],
+    money: [
+      {
+        id: '1',
+        description: 'Hot dog',
+        value: 'R$ 10,00',
+        status: 'in',
+        period: '09/12/2019',
+      },
+    ],
   };
 
-  async componentDidMount() {
-    const response = await api.get(`/in_out`);
-    this.setState({ data: response.data });
-  }
+  handleAddMoney = depot => {
+    const { dispatch } = this.props;
 
-  render() {
-    const data = [50, 10];
+    dispatch({
+      type: 'ADD_MONEY',
+      depot,
+    });
+  };
 
-    const randomColor = () =>
-      ('#' + ((Math.random() * 0xffffff) << 0).toString(16) + '000000').slice(
-        0,
-        7
-      );
+  const data = [50, 10];
 
-    const pieData = data
-      .filter(value => value > 0)
-      .map((value, index) => ({
-        value,
-        svg: {
-          fill: randomColor(),
-          onPress: () => console.log('press', index),
-        },
-        key: `pie-${index}`,
-      }));
-
-    return (
-      <Container>
-        <InfoUserView>
-          <InfoUser>Olá, {this.state.name}</InfoUser>
-          <InfosSaldos>
-            <LabelSaldo>Carteira</LabelSaldo>
-            <ValueSaldo>R$ 20,00</ValueSaldo>
-          </InfosSaldos>
-        </InfoUserView>
-
-        <PieChart style={{ height: 200 }} data={pieData} />
-
-        <List
-          data={this.state.data}
-          keyExtractor={data => String(data.id)}
-          renderItem={({ item }) => (
-            <ViewContentList>
-              <ListValues>
-                <DescriptionValue>{item.description}</DescriptionValue>
-                <ListTextValues>{item.value}</ListTextValues>
-              </ListValues>
-            </ViewContentList>
-          )}
-        />
-        <ButtonOption>
-          <Icon name="add" size={25} color="#fff" />
-        </ButtonOption>
-      </Container>
+  const randomColor = () =>
+    ('#' + ((Math.random() * 0xffffff) << 0).toString(16) + '000000').slice(
+      0,
+      7
     );
-  }
+
+  const pieData = data
+    .filter(value => value > 0)
+    .map((value, index) => ({
+      value,
+      svg: {
+        fill: randomColor(),
+        onPress: () => console.log('press', index),
+      },
+      key: `pie-${index}`,
+    }));
+
+  return (
+    <Container>
+      <InfoUserView>
+        <InfoUser>Olá, {login}</InfoUser>
+        <InfosSaldos>
+          <LabelSaldo>Carteira</LabelSaldo>
+          <ValueSaldo>R$ 20,00</ValueSaldo>
+        </InfosSaldos>
+      </InfoUserView>
+
+      <PieChart style={{ height: 200 }} data={pieData} />
+
+      <List
+        data={this.state.money}
+        keyExtractor={money => String(money.id)}
+        renderItem={({ item }) => (
+          <ViewContentList>
+            <ListValues>
+              <DescriptionValue>{item.description}</DescriptionValue>
+              <ListTextValues>{item.value}</ListTextValues>
+            </ListValues>
+          </ViewContentList>
+        )}
+      />
+      <ButtonOption onPress={() => this.handleAddMoney(this.state.money)}>
+        <Icon name="add" size={25} color="#fff" />
+      </ButtonOption>
+    </Container>
+  );
 }
-export default Home;
+
+const mapStateToProps = state => ({
+  login: state.login,
+});
+export default connect(mapStateToProps)(Home);
