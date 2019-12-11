@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import Image from '../../assets/icon/cash.png';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from 'react-redux';
+import * as Actions from '../../store/modules/login/actions';
+
 import AsyncStorage from '@react-native-community/async-storage';
+
 import {
   Container,
   ContentUser,
@@ -24,25 +27,24 @@ class Login extends Component {
     const { logar } = this.state;
     const { dispatch } = this.props;
 
-    dispatch({
-      type: 'ADD_USER',
-      logar,
-    });
-
     this.setState({
       logar: logar,
     });
+
+    dispatch(Actions.login(logar));
 
     AsyncStorage.setItem('logar', JSON.stringify(logar));
   };
 
   async componentDidMount() {
-    const logar = await AsyncStorage.getItem('logar');
+    const login = await AsyncStorage.getItem('logar');
+    console.log(login);
 
-    if (logar) {
+    if (login) {
       this.setState({
-        logar: JSON.parse(logar),
+        logar: JSON.parse(login),
       });
+      this.props.logar = login;
     }
   }
 
