@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { PieChart } from 'react-native-svg-charts';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
+
 import * as ActionsMoney from '../../store/modules/money/actions';
-import * as ActionsLogin from '../../store/modules/login/actions';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import {
@@ -28,7 +28,7 @@ import {
   ButtonOption,
 } from './styles';
 
-function Home({ login, dispatch, money }) {
+function Home({ logado, money }) {
   // const data = [50, 10];
 
   // const randomColor = () =>
@@ -48,16 +48,19 @@ function Home({ login, dispatch, money }) {
   //     key: `pie-${index}`,
   //   }));
 
-  handleAddMoney = money => {
-    dispatch(ActionsMoney.addMoney(money));
+  const dataToInsert = [];
 
-    AsyncStorage.setItem('money', JSON.stringify(money));
+  const handleAddMoney = newMoney => {
+    ActionsMoney.addMoney(newMoney);
+
+    AsyncStorage.setItem('money', JSON.stringify(newMoney));
+    console.log(newMoney);
   };
 
   return (
     <Container>
       <InfoUserView>
-        <InfoUser>Olá, {ActionsLogin.login}</InfoUser>
+        <InfoUser>Olá, {logado}</InfoUser>
         <InfosSaldos>
           <LabelSaldo>Carteira</LabelSaldo>
           <ValueSaldo>R$ 20,00</ValueSaldo>
@@ -101,9 +104,9 @@ function Home({ login, dispatch, money }) {
 }
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(ActionsLogin, dispatch);
+  bindActionCreators({ ...ActionsMoney }, dispatch);
 const mapStateToProps = state => ({
-  login: state.login,
+  logado: state.login,
   money: state.money,
 });
 

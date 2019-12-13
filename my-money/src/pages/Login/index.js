@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Image from '../../assets/icon/cash.png';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as Actions from '../../store/modules/login/actions';
+
+import * as ActionsMoney from '../../store/modules/money/actions';
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -23,33 +25,29 @@ class Login extends Component {
     logar: '',
   };
 
-  handleAddUser = () => {
-    const { logar } = this.state;
-    const { dispatch } = this.props;
+  handleAddUser = logar => {
+    const { login } = this.props;
 
     this.setState({
       logar: logar,
     });
-
-    dispatch(Actions.login(logar));
+    login.push(logar);
 
     AsyncStorage.setItem('logar', JSON.stringify(logar));
   };
 
   async componentDidMount() {
-    const login = await AsyncStorage.getItem('logar');
-    console.log(login);
-
-    if (login) {
+    const logando = await AsyncStorage.getItem('logar');
+    if (logando) {
       this.setState({
-        logar: JSON.parse(login),
+        logar: JSON.parse(logando),
       });
-      this.props.logar = login;
     }
   }
 
   render() {
     const { logar } = this.state;
+    const { login } = this.props;
     return (
       <Container>
         <ContentUser>
@@ -79,4 +77,10 @@ class Login extends Component {
   }
 }
 
-export default connect()(Login);
+const mapStateToProps = state => ({
+  login: state.login,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ActionsMoney, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
